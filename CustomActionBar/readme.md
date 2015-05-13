@@ -1,7 +1,7 @@
 
 #These lines should be noted
 
-Create Menu Layout:
+Menu Layout:
 menu/menu_main.xml
 
 <pre>
@@ -14,7 +14,7 @@ app:showAsAction="ifRoom" // using 'app' namespace
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Create Menu at Top:
+
 MainActivity.java
 
 <pre>
