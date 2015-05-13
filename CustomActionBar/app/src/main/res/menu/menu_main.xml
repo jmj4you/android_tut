@@ -6,9 +6,11 @@
         android:title="Search"
         app:showAsAction="ifRoom"
         />
-    <item android:id="@+id/action_compose"
+    <item android:id="@+id/action_x"
         android:icon="@drawable/abc_ic_clear_mtrl_alpha"
         android:title="Location"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|withText"
         />
+
+    
 </menu>

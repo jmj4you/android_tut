@@ -9,6 +9,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto" // New namespace
 
 app:showAsAction="ifRoom" // using 'app' namespace
 </pre>
+
+Using XML attributes from the support library.
+Notice that the showAsAction attribute above uses a custom namespace defined in the <menu> tag. This is necessary when using any XML attributes defined by the support library, because these attributes do not exist in the Android framework on older devices. So you must use your own namespace as a prefix for all attributes defined by the support library.
 -> Menu Resource http://developer.android.com/guide/topics/resources/menu-resource.html
 
 --------------------------------------------------------------------------------------------------------------------------------------------
