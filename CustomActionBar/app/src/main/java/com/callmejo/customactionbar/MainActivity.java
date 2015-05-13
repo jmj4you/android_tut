@@ -1,6 +1,7 @@
 package com.callmejo.customactionbar;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        ActionBar.setBackgroundDrawable();
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     /*
@@ -42,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
 //                openSearch();
                 return true;
             case R.id.action_x:
-                Toast.makeText(this,"You clicked X",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "You clicked X", Toast.LENGTH_LONG).show();
 //                composeMessage();
                 return true;
             default:
