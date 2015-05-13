@@ -1,5 +1,5 @@
 
-#Comments
+#These lines should be noted
 
 Create Menu Layout:
 menu/menu_main.xml
