@@ -18,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import network.VolleySingleton;
+
 
 public class MainActivity extends Activity {
 
@@ -58,7 +60,8 @@ public class MainActivity extends Activity {
 
     public void getMyaddress(View view) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
+//        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = VolleySingleton.getsInstance().getRequestQueue();
 
 
 // Request a string response from the provided URL.

@@ -7,7 +7,7 @@ AndroidManifest.xml
 </pre>
 
 #You have to add library for volley
- 1. Download volley.jar from
+ 1. Download volley.jar from (https://androidtutorialmagic.wordpress.com/2015/02/03/adding-android-volley-library-in-android-studio/)
  2. Put it into app/libs
  3. Add dependencies *** compile files('libs/volley.jar') *** into build.gradle(Mobule.app)
  4. Clean and rebuild app
@@ -75,6 +75,13 @@ MainActivity.java
 
 </pre>
 
+-> Reference
+Sending a Simple Request
+https://developer.android.com/training/volley/simple.html
 
-->ActionBar
-https://developer.android.com/guide/topics/ui/actionbar.html
+Sending a Custom Request
+https://developer.android.com/training/volley/request-custom.html
+
+# Here RequestQueue change to Singleton Queue
+Volley Singleton
+https://www.youtube.com/watch?v=T4SF7S6pYfE
