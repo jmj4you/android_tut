@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFEB3B</color> // 500
-    <color name="colorPrimaryDark">#FBC02D</color> //700
-    <color name="colorAncent">#212121</color>
+    <color name="primaryColor">#FFEB3B</color> // 500
+    <color name="primaryDarkColor">#FBC02D</color> //700
+    <color name="ancentColor">#270722</color>
 
 </resources>
