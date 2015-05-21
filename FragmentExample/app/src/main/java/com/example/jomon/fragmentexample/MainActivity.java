@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -23,17 +24,27 @@ public class MainActivity extends ActionBarActivity {
 
         if (view == findViewById(R.id.button_fragment_1)) {
             fragment = new FragmentOne();
-            FragmentManager fragmentManager=getFragmentManager();
-            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_place,fragment);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fragment);
+            fragmentTransaction.commit();
+        } else if (view == findViewById(R.id.button_fragment_2)) {
+            fragment = new FragmentTwo();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fragment);
             fragmentTransaction.commit();
         }
-        else if (view == findViewById(R.id.button_fragment_2) ){
-            fragment = new FragmentTwo();
-            FragmentManager fragmentManager=getFragmentManager();
-            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_place,fragment);
-            fragmentTransaction.commit();
+    }
+
+    public void showMe(View view) {
+
+        if (view == findViewById(R.id.button_in_fragment_1)) {
+            Toast.makeText(getApplicationContext(),"I am in Fragmnet One",Toast.LENGTH_SHORT).show();
+        }
+
+        if (view == findViewById(R.id.button_in_fragment_2)) {
+            Toast.makeText(getApplicationContext(),"I am in Fragmnet Two",Toast.LENGTH_SHORT).show();
         }
     }
 
