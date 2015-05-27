@@ -1,6 +1,7 @@
 package com.callmejo.httpapplication;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,10 +33,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.jmj.webservice.Api;
+import in.jmj.webservice.MyKeyValueList;
 
 public class MainActivity extends Activity {
 
@@ -69,6 +75,13 @@ public class MainActivity extends Activity {
 
         Api.apiGet(view, this, Api.URL_BLOOD_GROUPS);
     }
+ public void signUp(View view) {
+
+        Api.apiPost(view, this, Api.URL_SIGNUP);
+    }
+
+
+
     public void myProfilePop(View view) {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this); // 'this' is Context
 
@@ -169,69 +182,17 @@ public class MainActivity extends Activity {
      */
 
 
-
     public void signUqqp(View view) {
 
-        String[] arrayOfString = { "Hello", "people", "hello", "world!" };
+        String[] arrayOfString = {"Hello", "people", "hello", "world!"};
 
-        if(arrayOfString!=null){
+        if (arrayOfString != null) {
 
-        for (String s : arrayOfString)
-            Log.e("Arr",s);
+            for (String s : arrayOfString)
+                Log.e("Arr", s);
         }
 
     }
-    public void signUp(View view) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.URL_TEST_POST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        JSONObject obj = myJSON(response);
-
-                        try {
-                            Log.e("RESPO:", obj.getString("name"));
-                            Log.e("RESPO:", String.valueOf(obj.getInt("mobile")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                BreakIterator errorTextView;
-                Log.e("RESPO:", "That didn't work!");
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("name", "JMJ");
-                params.put("mobile", "12336");
-                return params;
-            }
-
-        };
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-
-    }
-
-    /*JSON paarse customize */
-    public JSONObject myJSON(String response) {
-        JSONObject obj = null;
-        try {
-            obj = new JSONObject(response);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return obj;
-    }
 
 }
