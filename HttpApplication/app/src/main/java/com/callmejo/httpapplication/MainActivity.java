@@ -32,9 +32,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import my.custom.definition.UrlNames;
+import in.jmj.webservice.Api;
 
 public class MainActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,16 @@ public class MainActivity extends Activity {
     }
 
     public void myProfile(View view) {
+
+        Api.apiGet(view, this, Api.URL_BLOOD_GROUPS);
+    }
+    public void myProfilePop(View view) {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this); // 'this' is Context
 
 //        final String URL = "http://jomon-mybc.rhcloud.com/api/v1/bloodgroups";
 
 // pass second argument as "null" for GET requests
-        JsonObjectRequest req = new JsonObjectRequest(UrlNames.URL_BLOOD_GROUPS, null,
+        JsonObjectRequest req = new JsonObjectRequest(Api.URL_BLOOD_GROUPS, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -115,7 +120,7 @@ public class MainActivity extends Activity {
 
         JsonObjectRequest myRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                UrlNames.URL_TEST_POST,
+                Api.URL_TEST_POST,
                 new JSONObject(params),
 
                 new Response.Listener<JSONObject>() {
@@ -163,40 +168,25 @@ public class MainActivity extends Activity {
 
      */
 
-    public void signUpGet(View view) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-//        RequestQueue queue = VolleySingleton.getsInstance().getRequestQueue();
 
 
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, UrlNames.URL_TEST_GET,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-//                        JSONObject obj = myJSON(response);
-                        Log.e("RESPO:", response);
+    public void signUqqp(View view) {
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                BreakIterator errorTextView;
-                Log.e("RESPO:", "That didn't work!");
-            }
-        });
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        String[] arrayOfString = { "Hello", "people", "hello", "world!" };
 
+        if(arrayOfString!=null){
+
+        for (String s : arrayOfString)
+            Log.e("Arr",s);
+        }
 
     }
-
     public void signUp(View view) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
 // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlNames.URL_TEST_POST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.URL_TEST_POST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
