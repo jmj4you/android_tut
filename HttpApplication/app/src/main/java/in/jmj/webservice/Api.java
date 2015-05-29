@@ -1,8 +1,10 @@
 package in.jmj.webservice;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,6 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.callmejo.httpapplication.ApplicationController;
+import com.callmejo.httpapplication.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,94 +37,56 @@ public class Api {
     public static String URL_BASE = "http://jomon-mybc.rhcloud.com/api/v1";
     public static String URL_BLOOD_GROUPS = URL_BASE + "/bloodgroups";
     public static String URL_SIGNUP = URL_BASE + "/signup";
-    public static String URL_TEST_POST = URL_TEST_BASE + "/testPost";
-    public static String URL_TEST_GET = URL_TEST_BASE + "/testGet?jmj=65";
+//    public static String URL_TEST_POST = URL_TEST_BASE + "/testPost";
+//    public static String URL_TEST_GET = URL_TEST_BASE + "/testGet?jmj=65";
 
-    private String apiResponse;
+    final Context context;
+    public JSONObject objResult;
 
-    public static void apiGet(View view, final Context context, String url) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(context);
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-/*
-Do your Code here
- */
-//                        return response;
-                    }
-                }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                BreakIterator errorTextView;
-                Toast.makeText(context, "That didn't work!", Toast.LENGTH_LONG).show();
+    public Api(Context context) {
+        this.context = context;
+    }
 
-            }
+
+    public static JSONObject toJSON(String string) {
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(string);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        );
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
+        return obj;
     }
 
-/*
-POST example STRING
- */
+    public JSONObject parseMyResponse(String response) {
 
-    public static void apiPost(View view, final Context context, String url) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(context);
+        JSONObject obj = toJSON(response);
 
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("respo:", response);
-//
-//                        JSONObject obj = null;
-//                        try {
-//                            obj = new JSONObject(response);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-//                BreakIterator errorTextView;
-                Log.e("RESPO:", "That didn't work!");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("name", "JMJ");
-//                params.put("mobile", "12336");
-                params.put("email", "jomon@gmail.com");
-                params.put("password", "a@12345");
-                params.put("name", "Jomon");
-                params.put("contact_number", "9495367667");
-                params.put("gender", "2");
-                params.put("dob", "10-12-1986");
-                params.put("blood_group", "5");
-                params.put("hb_count", "13");
-                params.put("latitude", "9.9653689");
-                params.put("longitude", "76.30716939999999");
-                params.put("place_name", "Chilavannur Road, Chilavannur");
-                return params;
+        try {
+            String resultArray = obj.getString("result");
+            objResult = toJSON(resultArray);
+//            Log.e("STS", objResult.getString("status"));
+
+            if (objResult.getString("status").equals("fail")) {
+//                Log.e("ERROR_>", "FAILED");
+                String error_title = objResult.getString("message");
+                String error_string = objResult.getString("error");
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle(error_title);
+                alert.setMessage(error_string);
+                alert.setPositiveButton("OK", null);
+                alert.show();
             }
 
-        };
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        } catch (JSONException e) {
+            Log.e("Err: ", e.toString());
+            e.printStackTrace();
 
-
+        }
+        return objResult;
     }
+
 
 }
 

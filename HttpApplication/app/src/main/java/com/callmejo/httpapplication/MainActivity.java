@@ -1,9 +1,11 @@
 package com.callmejo.httpapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,11 +45,13 @@ import in.jmj.webservice.MyKeyValueList;
 
 public class MainActivity extends Activity {
 
+    public EditText editText_name, editText_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editText_name = (EditText) findViewById(R.id.editText_name);
     }
 
     @Override
@@ -71,127 +76,101 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void myProfile(View view) {
 
-        Api.apiGet(view, this, Api.URL_BLOOD_GROUPS);
-    }
- public void signUp(View view) {
+    public void apiGet(View view) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        // API object
+        final Api API = new Api(this);
 
-        Api.apiPost(view, this, Api.URL_SIGNUP);
-    }
-
-
-
-    public void myProfilePop(View view) {
-        RequestQueue mRequestQueue = Volley.newRequestQueue(this); // 'this' is Context
-
-//        final String URL = "http://jomon-mybc.rhcloud.com/api/v1/bloodgroups";
-
-// pass second argument as "null" for GET requests
-        JsonObjectRequest req = new JsonObjectRequest(Api.URL_BLOOD_GROUPS, null,
-                new Response.Listener<JSONObject>() {
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                Api.URL_BLOOD_GROUPS,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
+                        String resp_msg = "";
+                        JSONObject responseObj = API.parseMyResponse(response);
                         try {
-                            Toast.makeText(getApplicationContext(), response.toString(4), Toast.LENGTH_LONG).show();
-//                            VolleyLog.v("Response:%n %s", response.toString(4));
+                            resp_msg = responseObj.getString("message");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        Toast.makeText(getApplicationContext(), resp_msg, Toast.LENGTH_LONG).show();
+/*
+Do your Code here
+ */
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                BreakIterator errorTextView;
+                Toast.makeText(getApplicationContext(), "Please try again later!", Toast.LENGTH_LONG).show();
+
+            }
+        }
+        );
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+    }
+
+
+    public void apiPost(final View view) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+// API object
+        final Api API = new Api(this);
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Api.URL_SIGNUP,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("respo:", response);
+                        JSONObject reponseObj = API.parseMyResponse(response);
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
+//                BreakIterator errorTextView;
+                Toast.makeText(getApplicationContext(), "Please try again later!", Toast.LENGTH_LONG).show();
             }
-        });
-
-// add the request object to the queue to be executed
-        ApplicationController.getInstance().addToRequestQueue(req);
-    }
-
-
-    public void signlop(View view) {
-        Map<String, String> params = new HashMap<String, String>();
-//        jsonParams.put("param1", youParameter);
-
-//        StringRequest req = new StringRequest(URL, new Response.Listener<String>(){
-//
-//        }
-
-        params.put("email", "jomon@gmail.com");
-        params.put("password", "a@12345");
-        params.put("name", "Jomon");
-        params.put("contact_number", "9495367667");
-        params.put("gender", "2");
-        params.put("dob", "10-12-1986");
-        params.put("blood_group", "5");
-        params.put("hb_count", "13");
-        params.put("latitude", "9.9653689");
-        params.put("longitude", "76.30716939999999");
-        params.put("place_name", "Chilavannur Road, Chilavannur");
-
-        JsonObjectRequest myRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                Api.URL_TEST_POST,
-                new JSONObject(params),
-
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-//                        verificationSuccess(response);
-                        Log.e("Sucess : : ", response.toString());
-                    }
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-//                        verificationFailed(error);\
-                        String error1 = error.toString();
-                        Log.e("Error: ", "" + error1.toString());
-                    }
-
-                }
-
-        )
-
-        {
-
+        }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-//                headers.put("User-agent", "My useragent");
-                return headers;
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+//                params.put("name", "JMJ");
+//                params.put("mobile", "12336");
+                params.put("email", "jomon@gmail.com");
+                params.put("password", "a@12345");
+//                params.put("name", "Jomon");
+//                params.put("contact_number", "9495367667");
+//                params.put("gender", "2");
+//                params.put("dob", "10-12-1986");
+                params.put("blood_group", "5");
+                params.put("hb_count", "13");
+                params.put("latitude", "9.9653689");
+                params.put("longitude", "76.30716939999999");
+                params.put("place_name", "Chilavannur Road, Chilavannur");
+                return params;
             }
 
-            //
-
-            //
         };
-        ApplicationController.getInstance().
-
-                addToRequestQueue(myRequest, "tag");
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
 
 
     }
 
-    /*
 
-     */
+    public void validateName(View view) {
 
-
-    public void signUqqp(View view) {
-
-        String[] arrayOfString = {"Hello", "people", "hello", "world!"};
-
-        if (arrayOfString != null) {
-
-            for (String s : arrayOfString)
-                Log.e("Arr", s);
-        }
-
+        editText_name.setError("Field cannot be left blank.");
     }
 
 

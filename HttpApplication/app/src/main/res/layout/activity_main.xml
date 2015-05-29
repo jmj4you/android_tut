@@ -15,25 +15,43 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:onClick="myProfile"
-        android:text="All Groups" />
+        android:onClick="apiGet"
+        android:text="GET" />
 
     <Button
         android:id="@+id/button_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_group"
-        android:onClick="signUp"
-        android:text="SIGN UP" />
+        android:onClick="apiPost"
+        android:text="POST" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="41dp"
+        android:hint="Email please.." />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_marginBottom="41dp"
+        android:hint="Name please.." />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/button_signup"
-        android:layout_marginStart="73dp"
-        android:onClick="myListView"
-        android:text="My list View" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:onClick="validateName"
+        android:text="VALIDATE" />
+
 
 </RelativeLayout>
