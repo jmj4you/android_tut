@@ -33,7 +33,7 @@
              at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903)
              at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698)
  </pre>
-
+<br>
  #activity_main.xml
  <code>
 
@@ -46,7 +46,7 @@
      android:theme="@style/MyHolo"
      &gt
 
-
+<br><br>
      &ltButton
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -56,9 +56,11 @@
          android:layout_centerHorizontal="true"
          android:onClick="clickMe"
          /&gt
+         <br>
 &lt/RelativeLayout&gt
 
  </code>
+ <br><br>
 
  #MainActivity.java
  <pre>
