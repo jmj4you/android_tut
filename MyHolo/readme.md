@@ -1,4 +1,4 @@
-<h2>It worked first there has no <code>   android:theme="@style/MyHolo"</code> in activity_main.xml. But I want to make custom theme. </h2>
+<h5>It worked first there has no <code>   android:theme="@style/MyHolo"</code> in activity_main.xml. But I want to make custom theme. </h5>
 #MyHolo theme I downloaded from http://android-holo-colors.com/ by these criteria
 <a href="#">Here the criteria screen short</a>
 # onclick is not working in My custom Holo theme.
@@ -35,7 +35,7 @@
  </pre>
 
  #activity_main.xml
- <pre>
+ <code>
  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
      android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -57,7 +57,7 @@
          />
  </RelativeLayout>
 
- </pre>
+ </code>
 
  #MainActivity.java
  <pre>
