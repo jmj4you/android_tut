@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CLICK ME"
-        android:id="@+id/button"
+        android:id="@+id/click_button"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="clickMe"
+
         />
 </RelativeLayout>
