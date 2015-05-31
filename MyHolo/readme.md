@@ -1,6 +1,6 @@
 <h5>It worked first there has no <code>   android:theme="@style/MyHolo"</code> in activity_main.xml. But I want to make custom theme. </h5>
 #MyHolo theme I downloaded from http://android-holo-colors.com/ by these criteria
-<a href="#">Here the criteria screen short</a>
+<a target="_blank" href="https://raw.githubusercontent.com/jmj4you/android_tut/master/MyHolo/MyHolo-screenshot-android-holo-colors.com.png">Here the criteria screen short</a>
 # onclick is not working in My custom Holo theme.
 <pre>
 
