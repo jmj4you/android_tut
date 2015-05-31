@@ -36,7 +36,7 @@
 
  #activity_main.xml
  <code>
- <!--
+
  &ltRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
      android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -57,7 +57,7 @@
          android:onClick="clickMe"
          /&gt
 &lt/RelativeLayout&gt
--->
+
  </code>
 
  #MainActivity.java
