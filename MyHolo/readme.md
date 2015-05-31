@@ -35,6 +35,7 @@
  </pre>
 <br>
  #activity_main.xml
+ <br><br>
  <code>
 
  &ltRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -89,7 +90,9 @@
 
  </pre>
 
- # My gradle file
+ # My gradle file <br><br>
+ <br><br>
+
  <pre>
  apply plugin: 'com.android.application'
 
