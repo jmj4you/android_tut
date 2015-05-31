@@ -1,42 +1,29 @@
 package com.callmejo.httpapplication;
 
 import android.app.Activity;
+
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+
 import android.widget.EditText;
-import android.widget.ListView;
+
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +32,14 @@ import in.jmj.webservice.MyKeyValueList;
 
 public class MainActivity extends Activity {
 
-    public EditText editText_name, editText_email;
+    public static EditText editText_name, editText_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editText_name = (EditText) findViewById(R.id.editText_name);
+        editText_email = (EditText) findViewById(R.id.editText_email);
     }
 
     @Override
@@ -90,7 +78,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         String resp_msg = "";
-                        JSONObject responseObj = API.parseMyResponse(response);
+                        JSONObject responseObj = API.parseMyResponse(MainActivity.this, response);
                         try {
                             resp_msg = responseObj.getString("message");
                         } catch (JSONException e) {
@@ -129,9 +117,28 @@ Do your Code here
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("respo:", response);
-                        JSONObject reponseObj = API.parseMyResponse(response);
+                        JSONObject obj = API.toJSON(response);
+                        try {
+                            String resultArray = obj.getString("result");
+                            JSONObject objResult = API.toJSON(resultArray);
+                            if (objResult.getString("status").equals("fail")) {
+//                                Log.e("ERROR_>", "FAILED");
+                                String error_title = objResult.getString("message");
+                                String error_string = objResult.getString("error");
+                                JSONObject objError = API.toJSON(error_string);
 
+                                if (objError.has("email"))
+                                    editText_email.setError(objError.getString("email"));
+                                if (objError.has("name"))
+                                    editText_name.setError(objError.getString("name"));
+
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("Err: ", e.toString());
+                            e.printStackTrace();
+
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -146,7 +153,7 @@ Do your Code here
                 Map<String, String> params = new HashMap<String, String>();
 //                params.put("name", "JMJ");
 //                params.put("mobile", "12336");
-                params.put("email", "jomon@gmail.com");
+//                params.put("email", "jomon@gmail.com");
                 params.put("password", "a@12345");
 //                params.put("name", "Jomon");
 //                params.put("contact_number", "9495367667");
