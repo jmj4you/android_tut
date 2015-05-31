@@ -37,17 +37,17 @@
  #activity_main.xml
  <code>
  <!--
- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ &ltRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
      android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
      android:paddingRight="@dimen/activity_horizontal_margin"
      android:paddingTop="@dimen/activity_vertical_margin"
      android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
      android:theme="@style/MyHolo"
-     >
+     &gt
 
 
-     <Button
+     &ltButton
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:text="CLICK ME"
@@ -55,8 +55,8 @@
          android:layout_centerVertical="true"
          android:layout_centerHorizontal="true"
          android:onClick="clickMe"
-         />
- </RelativeLayout>
+         /&gt
+&lt/RelativeLayout&gt
 -->
  </code>
 
