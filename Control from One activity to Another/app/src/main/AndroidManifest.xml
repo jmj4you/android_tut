@@ -32,6 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.callmejo.myapp2.MainActivity" />
         </activity>
+        <activity
+            android:name=".AccountVerificationActivity"
+            android:label="@string/title_activity_account_verification" >
+        </activity>
     </application>
 
 </manifest>
