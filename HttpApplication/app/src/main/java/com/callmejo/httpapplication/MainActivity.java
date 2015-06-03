@@ -68,8 +68,6 @@ public class MainActivity extends Activity {
     public void apiGet(View view) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        // API object
-        final Api API = new Api(this);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -77,18 +75,9 @@ public class MainActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        String resp_msg = "";
-                        JSONObject responseObj = API.parseMyResponse(MainActivity.this, response);
-                        try {
-                            resp_msg = responseObj.getString("message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        Toast.makeText(getApplicationContext(), resp_msg, Toast.LENGTH_LONG).show();
-/*
-Do your Code here
- */
+/*Do your Code here */
+                        Log.e("RESPO", response);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     }
                 }
                 , new Response.ErrorListener() {
@@ -96,6 +85,7 @@ Do your Code here
             public void onErrorResponse(VolleyError error) {
 //                BreakIterator errorTextView;
                 Toast.makeText(getApplicationContext(), "Please try again later!", Toast.LENGTH_LONG).show();
+                Log.e("Error", "");
 
             }
         }
