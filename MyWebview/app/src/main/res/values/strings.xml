@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">GmapWithCurrentLocation</string>
+    <string name="app_name">MyWebview</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_webview">Webview</string>
+    <string name="title_activity_callback">CallbackActivity</string>
 </resources>
